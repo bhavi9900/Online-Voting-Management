@@ -13,10 +13,10 @@
 | Name               	| Role                	| Email             	|
 |--------------------	|---------------------	|-------------------	|
 | Tharun Reddy Myaka 	| Back-End-Developer  	| tr-mayaka@wiu.edu 	|
-| Bharath            	| Back-End-Developer  	|                   	|
-| Bhavya             	| Back-End-Developer  	|                   	|
-| Kishore            	| Front-End-Developer 	|                   	|
-| Prakesh            	| Front-End-Developer 	|                   	|
+| Bharath Burugupally | Back-End-Developer  	|                   	|
+| Bhavya Kamepelli   	| Back-End-Developer  	|                   	|
+| Kishor Babu Gopineni| Front-End-Developer 	|                   	|
+| Prakash K           | Front-End-Developer 	|                   	|
 
 
 ## Screenshot
