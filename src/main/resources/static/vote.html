@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<title>Voting Management</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="./vote.js"></script>
+<style>
+    .btn-primary {
+        background-color: #2a8bae !important;
+    }
+
+    .bg-primary {
+        background-color: #2a8bae !important;
+    }
+</style>
+
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="onload();">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary " style="background-color: #2a8bae;">
+        <img src="./logo.png" alt="" style="height: 54px;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active menuCls" id="viewCandidateTabId" menuType="VIEW-CANDIDATE">
+                    <a class="nav-link" href="#" ng-click="switchMenu('VIEW-CANDIDATE','viewCandidateTabId')">View
+                        Candidate</a>
+                </li>
+                <li class="nav-item menuCls" ng-if="userName =='ADMIN'" menuType="ELECTION_NAME" id="addElectionTabId">
+                    <a class="nav-link" href="#" ng-click="switchMenu('ELECTION_NAME','addElectionTabId')">Add/Edit/View
+                        Election</a>
+                </li>
+                <li class="nav-item menuCls" menuType="CAST_VOTE" id="castVoteTabId">
+                    <a class="nav-link" href="#" ng-click="switchMenu('CAST_VOTE','castVoteTabId')">{{userName ==
+                        "ADMIN" ? "Cancel Vote" : "Cast Vote"}}</a>
+                </li>
+                <li class="nav-item menuCls" menuType="VIEW_RESULT" id="viewResultTabId">
+                    <a class="nav-link" href="#" ng-click="switchMenu('VIEW_RESULT','viewResultTabId')">View
+                        Result</a>
+                </li>
+            </ul>
+            <span class="navbar-text" style="cursor: pointer;">
+                <i class="fa fa-sign-out" style="font-size: 20px;" ng-click="logout()">Logout</i>
+            </span>
+        </div>
+    </nav>
+    <!-- VIEW_CANDIDATE -->
+    <div class="col-md-12 p-0" id="viewCandidateDivId">
+        <div class="col-md-12 p-0">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">DOB</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Election Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="data in viewUserData">
+                        <td scope="col">{{data.userName}}</td>
+                        <td scope="col">{{data.dob}}</td>
+                        <td scope="col">{{data.contactNum}}</td>
+                        <td scope="col">{{data.emailId}}</td>
+                        <td scope="col">{{data.gender}}</td>
+                        <td scope="col">{{data.elName}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--  Add Election  -->
+    <div id="electionAddDivId">
+        <div class="row col-md-12">
+            <form class="col-md-5">
+                <div class="form-group">
+                    <label> Name of Election</label>
+                    <input type="text" class="form-control" id="elNameId">
+                </div>
+                <div class="form-group">
+                    <label> Start Date</label>
+                    <input type="date" class="form-control" id="startDateId">
+                </div>
+                <div class="form-group">
+                    <label> End Date</label>
+                    <input type="date" class="form-control" id="endDateId">
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <textarea type="date" class="form-control" id="locationId"></textarea>
+                </div>
+                <button type="button" class="btn btn-primary btn-block" ng-click="addElection()">{{isEdit ? 'Edit' :
+                    'Add'}}</button>
+            </form>
+            <div class="mt-1 col-md-7 p-0">
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Name of Election</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in electionNameList">
+                            <td scope="col">{{data.elName}}</td>
+                            <td scope="col">{{data.startDate}}</td>
+                            <td scope="col">{{data.endDate}}</td>
+                            <td scope="col">{{data.location}}</td>
+                            <td><input title="Edit" type="checkbox" class="form-check-input edit-cls"
+                                    ng-click="editElectionDetails($event, data)"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <!--  Cast Vote  -->
+    <div class="col-md-5 justify-content-center" style="margin-left: 27%;" id="castVoteDivId">
+        <form class="mt-3">
+            <div class="form-group">
+                <label for="email"></i> Election Name</label>
+                <select class="form-control" ng-model="electionNameModel"
+                    ng-change="getCandidateList(electionNameModel)">
+                    <option value="">Select Name</option>
+                    <option value="{{data.elNameId}}" ng-repeat="data in electionNameList">{{data.elName}}</option>
+                </select>
+            </div>
+            <div class="form-group" ng-show="userName != 'ADMIN'">
+                <label for="email"></i> Candidate</label>
+                <select class="form-control" ng-model="candidateDetails"
+                    ng-options="item.userName for item in candidateList"
+                    ng-change="electionNameModel = candidateDetails.elNameId">
+                    <option value="">Select Name</option>
+                </select>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-block"
+                ng-click="voteCandidate(userName == 'ADMIN')">{{userName == "ADMIN" ?
+                "Cancel" :"Vote"}}</button>
+        </form>
+    </div>
+    <!-- VIEW RESULT -->
+    <div class="col-md-12 p-0" id="viewResultDivId">
+        <div class="col-md-12 p-0">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Number of Vote</th>
+                        <th scope="col">Election Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="data in viewUserData">
+                        <td scope="col">{{data.userName}}</td>
+                        <td scope="col">{{data.voterCount}}</td>
+                        <td scope="col">{{data.elName}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>
