@@ -3,7 +3,7 @@
 
  - The project is about creating a web application that allows eligible voters to cast their votes online securely. It will also include features for voter registration, authentication, and result tracking.
 
- - We are planning to develop this app using technologies based on firebase with DotNet as back-end and JavaScript and HTML as front-end.
+ - We are planning to develop this app using technologies based on Google with firebase as back-end and JavaScript and HTML as front-end.
 
 ## External Requirements
 
