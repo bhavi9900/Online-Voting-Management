@@ -10,13 +10,13 @@
 - Spring Tool Suit-4
 ## My Team
 
-| Name               	| Role                	| Email             	|
-|--------------------	|---------------------	|-------------------	|
-| Tharun Reddy Myaka 	| Back-End-Developer  	| tr-mayaka@wiu.edu 	|
-| Bharath Burugupally | Back-End-Developer  	|                   	|
-| Bhavya Kamepelli   	| Back-End-Developer  	|                   	|
-| Kishor Babu Gopineni| Front-End-Developer 	|                   	|
-| Prakash K           | Front-End-Developer 	|                   	|
+| Name               	| Role                	| Email             	 |
+|--------------------	|---------------------	|-------------------	 |
+| Tharun Reddy Myaka 	| Back-End-Developer  	| tr-mayaka@wiu.edu 	 |
+| Bharath Burugupally | Back-End-Developer  	|b-burugupally@wiu.edu|
+| Bhavya Kamepelli   	| Back-End-Developer  	| b-kamepalli@wiu.edu |
+| Kishor Babu Gopineni| Front-End-Developer 	| kb-gopineni@wiu.edu	|
+| Prakash K           | Front-End-Developer 	| p-kallempudi@wiu.edu|
 
 
 ## Screenshot
