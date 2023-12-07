@@ -1,5 +1,5 @@
 
-## Online-Voing-Management
+## Online-Voting-Management
 
  - The project is about creating a web application that allows eligible voters to cast their votes online securely. It will also include features for voter registration, authentication, and result tracking.
 
